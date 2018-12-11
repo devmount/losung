@@ -40,7 +40,7 @@
         <div class="columns">
           <div class="column col-12 text-center">
             <p>
-              <span class="d-block">Version 0.1.2</span>
+              <span class="d-block">Version 0.1.3</span>
               <i class="icon icon-resize-horiz"></i> with love by <a href="https://twitter.com/devmount" target="_blank">Andreas Müller</a>.
               <i class="icon icon-download ml-1"></i> on <a href="https://github.com/devmount/losung" target="_blank">GitHub</a>.
             </p>
@@ -78,9 +78,20 @@ export default {
   },
   mounted () {
     var self = this
-    fetch('2018.csv')
-      .then(response => response.text())
-      .then(text => self.getLosung(text))
+    // -- ES6:
+    // fetch('2018.csv')
+    //   .then(response => response.text())
+    //   .then(text => self.getLosung(text))
+    var rawFile = new XMLHttpRequest();
+    // -- older browsers:
+    rawFile.open("GET", '2018.csv', false);
+    rawFile.onreadystatechange = function () {
+      if(rawFile.readyState === 4 && (rawFile.status === 200 || rawFile.status == 0)) {
+        var text = rawFile.responseText;
+        self.getLosung(text)
+      }
+    }
+    rawFile.send(null);
   }
 }
 </script>
