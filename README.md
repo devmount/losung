@@ -24,9 +24,9 @@ A web app to display the Losung for today.
 3. Get the CSV source file from Herrnhuter Brüdergemeinde for the current year, rename and move it to the `public` directory. This step has to be repeated every year.
 
     ```bash
-    wget https://www.losungen.de/fileadmin/media-losungen/download/Losung_2018_CSV.zip
-    unzip Losung_2018_CSV.zip
-    mv "Losungen Free 2018.csv" public/2018.csv
+    wget https://www.losungen.de/fileadmin/media-losungen/download/Losung_2019_CSV.zip
+    unzip Losung_2019_CSV.zip
+    mv "Losungen Free 2019.csv" public/2019.csv
     ```
 
 4. Either start the development server with hot reload at localhost:8080 ...

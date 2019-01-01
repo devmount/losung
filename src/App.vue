@@ -64,6 +64,7 @@ export default {
   },
   methods: {
     getLosung (text) {
+      // get line without quotes
       var lines = text.replace(/\//g, '').replace(/"/g, '').split(/\r?\n/)
       for (let line of lines) {
         var record = line.split(/\t/)
@@ -79,12 +80,12 @@ export default {
   mounted () {
     var self = this
     // -- ES6:
-    // fetch('2018.csv')
+    // fetch('2019.csv')
     //   .then(response => response.text())
     //   .then(text => self.getLosung(text))
     var rawFile = new XMLHttpRequest();
     // -- older browsers:
-    rawFile.open("GET", '2018.csv', false);
+    rawFile.open("GET", '2019.csv', false);
     rawFile.onreadystatechange = function () {
       if(rawFile.readyState === 4 && (rawFile.status === 200 || rawFile.status == 0)) {
         var text = rawFile.responseText;
