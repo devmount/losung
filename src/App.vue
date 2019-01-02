@@ -17,11 +17,11 @@
             <div class="card-body text-large">
               <blockquote>
                 <p>{{ data[4] }}</p>
-                <cite class="float-right">— {{ data[3] }}</cite>
+                <cite class="float-right">—&nbsp;{{ data[3].replace(' ', '&nbsp;') }}</cite>
               </blockquote>
               <blockquote>
                 <p>{{ data[6] }}</p>
-                <cite class="float-right">— {{ data[5] }}</cite>
+                <cite class="float-right">—&nbsp;{{ data[5].replace(' ', '&nbsp;') }}</cite>
               </blockquote>
             </div>
           </div>
@@ -41,7 +41,7 @@
         <div class="columns">
           <div class="column col-12 text-center">
             <p>
-              <span class="d-block">Version 0.1.3</span>
+              <span class="d-block">Version 0.1.4</span>
               <i class="icon icon-resize-horiz"></i> with love by <a href="https://twitter.com/devmount" target="_blank">Andreas Müller</a>.
               <i class="icon icon-download ml-1"></i> on <a href="https://github.com/devmount/losung" target="_blank">GitHub</a>.
             </p>
