@@ -108,6 +108,7 @@ $bg-color: #181a1b;
 $bg-color-light: #181a1b;
 $bg-color-dark: #2c3638;
 $border-color: #222627;
+$gray-color: #595d65;
 $gray-color-dark: #595d65;
 
 @import "node_modules/spectre.css/src/spectre";
