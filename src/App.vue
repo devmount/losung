@@ -9,7 +9,7 @@
       <div class="columns">
         <div class="column col-12">
 
-          <div class="card">
+          <div v-if="data" class="card">
             <div class="card-header">
               <div class="card-title h4">{{ data[1] }}, {{ data[0] }}</div>
               <div class="card-subtitle text-gray">{{ data[2]}}</div>
@@ -25,6 +25,7 @@
               </blockquote>
             </div>
           </div>
+          <div v-else>No data available. Make sure, the data file for {{ today.getFullYear() }} was uploaded.</div>
 
         </div>
       </div>
@@ -85,11 +86,13 @@ export default {
     //   .then(text => self.getLosung(text))
     var rawFile = new XMLHttpRequest();
     // -- older browsers:
-    rawFile.open("GET", '2019.csv', false);
+    rawFile.open("GET", self.today.getFullYear() + '.csv', false);
     rawFile.onreadystatechange = function () {
-      if(rawFile.readyState === 4 && (rawFile.status === 200 || rawFile.status == 0)) {
+      if (rawFile.readyState === 4 && (rawFile.status === 200 || rawFile.status == 0)) {
         var text = rawFile.responseText;
         self.getLosung(text)
+      } else {
+        self.data = ''
       }
     }
     rawFile.send(null);
