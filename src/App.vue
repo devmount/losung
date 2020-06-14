@@ -1,55 +1,29 @@
 <template>
   <div id="app">
-    <div class="container grid-xs">
-      <div class="columns">
-        <div class="column col-12 text-center mb-2">
-          <h1>Die Losungen</h1>
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column col-12">
-
-          <div v-if="data" class="card">
-            <div class="card-header">
-              <div class="card-title h4">{{ data[1] }}, {{ data[0] }}</div>
-              <div class="card-subtitle text-gray">{{ data[2]}}</div>
-            </div>
-            <div class="card-body text-large">
-              <blockquote>
-                <p>{{ data[4] }}</p>
-                <cite class="float-right">—&nbsp;{{ data[3].replace(' ', '&nbsp;') }}</cite>
-              </blockquote>
-              <blockquote>
-                <p>{{ data[6] }}</p>
-                <cite class="float-right">—&nbsp;{{ data[5].replace(' ', '&nbsp;') }}</cite>
-              </blockquote>
-            </div>
-          </div>
-          <div v-else>No data available. Make sure, the data file for {{ today.getFullYear() }} was uploaded.</div>
-
-        </div>
-      </div>
-      <div class="columns mt-3 pb-5">
-        <div class="column col-12 text-center text-gray">
-          <p>Die Losungen<br />&copy; Evangelische Brüder-Unität<br />Herrnhuter Brüdergemeine</p>
-        </div>
-      </div>
+    <h1>Die Losungen</h1>
+    <div v-if="data">
+      <div>{{ data[1] }}, {{ data[0] }}</div>
+      <div>{{ data[2]}}</div>
+      <blockquote>
+        <p>{{ data[4] }}</p>
+        <cite>—&nbsp;{{ data[3].replace(' ', '&nbsp;') }}</cite>
+      </blockquote>
+      <blockquote>
+        <p>{{ data[6] }}</p>
+        <cite>—&nbsp;{{ data[5].replace(' ', '&nbsp;') }}</cite>
+      </blockquote>
     </div>
-
+    <div v-else>No data available. Make sure, the data file for {{ today.getFullYear() }} was uploaded.</div>
+    <div>
+      <p>Die Losungen<br />&copy; Evangelische Brüder-Unität<br />Herrnhuter Brüdergemeine</p>
+    </div>
     <footer>
-      <div class="container grid-xs">
-        <div class="columns">
-          <div class="column col-12 text-center">
-            <p>
-              <span class="d-block">Version 0.1.4</span>
-              <i class="icon icon-resize-horiz"></i> with love by <a href="https://twitter.com/devmount" target="_blank">Andreas Müller</a>.
-              <i class="icon icon-download ml-1"></i> on <a href="https://github.com/devmount/losung" target="_blank">GitHub</a>.
-            </p>
-          </div>
-        </div>
-      </div>
+      <p>
+        <span class="d-block">Version 0.1.4</span>
+        Built with 🤍 by <a href="https://twitter.com/devmount" target="_blank">Andreas Müller</a>.
+        Download on <a href="https://github.com/devmount/losung" target="_blank">GitHub</a>.
+      </p>
     </footer>
-
   </div>
 </template>
 
@@ -101,58 +75,5 @@ export default {
 </script>
 
 <style lang="scss">
-$primary-color: #30cef2;
-$error-color: #ed2f47;
-$body-font-color: #9ea4ad;
-$bg-color: #181a1b;
-$bg-color-light: #181a1b;
-$bg-color-dark: #2c3638;
-$border-color: #222627;
-$gray-color: #595d65;
-$gray-color-dark: #595d65;
 
-@import "node_modules/spectre.css/src/spectre";
-@import "node_modules/spectre.css/src/spectre-icons";
-// @import "node_modules/spectre.css/src/spectre-exp";
-
-body {
-  background: #111;
-}
-
-#app {
-  margin-top: 2em;
-  min-height: calc(100vh - 3em);
-  position: relative;
-
-  blockquote {
-    color: #c0c7d1;
-    border: none;
-    padding: 0 0 2em 0;
-    margin: 0 0 1em 0;
-
-    p {
-      margin: 0;
-    }
-  }
-
-  footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    
-    p {
-      color: $body-font-color;
-    }
-    a {
-      color: #eee;
-    }
-  }
-
-  .mt-3 {
-    margin-top: 1em;
-  }
-  .pb-5 {
-    padding-bottom: 5em;
-  }
-}
 </style>
