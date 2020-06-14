@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="bg-black">
     <h1>Die Losungen</h1>
     <div v-if="data">
       <div>{{ data[1] }}, {{ data[0] }}</div>
@@ -74,6 +74,10 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
 </style>
