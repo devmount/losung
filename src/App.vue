@@ -33,7 +33,7 @@
     </div>
     <footer class="text-center mb-6">
       <div class="text-gray-500">
-        Version 0.1.4
+        Version {{ version }}
       </div>
       <div class="text-gray-500">
         Built with 🤍 by <a href="https://devmount.de" target="_blank" class="text-gray-100">Andreas Müller</a>.
@@ -48,9 +48,11 @@ export default {
   name: 'app',
   data () {
     var d = new Date()
+    let version = require('../package.json').version
     return {
       today: d,
-      data: ''
+      data: '',
+      version: version
     }
   },
   methods: {
