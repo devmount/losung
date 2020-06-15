@@ -1,7 +1,7 @@
 <template>
-  <div id="app" class="min-h-screen mx-2 sm:mx-6 md:max-w-2xl md:mx-auto flex flex-col justify-between">
+  <div id="app" class="min-h-screen mx-2 sm:mx-6 md:max-w-2xl md:mx-auto flex flex-col justify-start sm:justify-between">
     <div>
-      <h1 class="text-center mb-6 mt-12">Die Losungen</h1>
+      <h1 class="text-center my-4 sm:mb-6 sm:mt-12">Die Losungen</h1>
       <div v-if="data" class="bg-gray-800 rounded border border-gray-700 p-5 mb-6">
         <!-- weekday, date -->
         <h2>{{ data[1] }}, {{ data[0] }}</h2>
@@ -31,7 +31,7 @@
         </div>
       </div>
     </div>
-    <footer class="text-center mb-6">
+    <footer class="text-center my-10">
       <div class="text-gray-500">
         Version {{ version }}
       </div>
