@@ -1,28 +1,44 @@
 <template>
-  <div id="app" class="bg-black">
-    <h1>Die Losungen</h1>
-    <div v-if="data">
-      <div>{{ data[1] }}, {{ data[0] }}</div>
-      <div>{{ data[2]}}</div>
-      <blockquote>
-        <p>{{ data[4] }}</p>
-        <cite>—&nbsp;{{ data[3].replace(' ', '&nbsp;') }}</cite>
-      </blockquote>
-      <blockquote>
-        <p>{{ data[6] }}</p>
-        <cite>—&nbsp;{{ data[5].replace(' ', '&nbsp;') }}</cite>
-      </blockquote>
-    </div>
-    <div v-else>No data available. Make sure, the data file for {{ today.getFullYear() }} was uploaded.</div>
+  <div id="app" class="min-h-screen mx-2 sm:mx-6 md:max-w-2xl md:mx-auto flex flex-col justify-between">
     <div>
-      <p>Die Losungen<br />&copy; Evangelische Brüder-Unität<br />Herrnhuter Brüdergemeine</p>
+      <h1 class="text-center mb-6 mt-12">Die Losungen</h1>
+      <div v-if="data" class="bg-gray-800 rounded border border-gray-700 p-5 mb-6">
+        <!-- weekday, date -->
+        <h2>{{ data[1] }}, {{ data[0] }}</h2>
+        <!-- special day description -->
+        <div>{{ data[2]}}</div>
+        <!-- losung -->
+        <blockquote class="mt-5">
+          <p>{{ data[4] }}</p>
+          <cite class="block text-right text-gray-600">—&nbsp;{{ data[3].replace(' ', '&nbsp;') }}</cite>
+        </blockquote>
+        <!-- lehrvers -->
+        <blockquote class="mt-5">
+          <p>{{ data[6] }}</p>
+          <cite class="block text-right text-gray-600">—&nbsp;{{ data[5].replace(' ', '&nbsp;') }}</cite>
+        </blockquote>
+      </div>
+      <div v-else>No data available. Make sure, the data file for {{ today.getFullYear() }} was uploaded.</div>
+      <div class="text-center text-gray-700">
+        <div>
+          <a href="http://www.losungen.de/" target="_blank">Die Losungen</a>
+        </div>
+        <div>
+          &copy; Evangelische Brüder-Unität
+        </div>
+        <div>
+          <a href="http://www.herrnhuter.de/" target="_blank">Herrnhuter Brüdergemeine</a>
+        </div>
+      </div>
     </div>
-    <footer>
-      <p>
-        <span class="d-block">Version 0.1.4</span>
-        Built with 🤍 by <a href="https://twitter.com/devmount" target="_blank">Andreas Müller</a>.
-        Download on <a href="https://github.com/devmount/losung" target="_blank">GitHub</a>.
-      </p>
+    <footer class="text-center mb-6">
+      <div class="text-gray-500">
+        Version 0.1.4
+      </div>
+      <div class="text-gray-500">
+        Built with 🤍 by <a href="https://devmount.de" target="_blank" class="text-gray-100">Andreas Müller</a>.
+        Download on <a href="https://github.com/devmount/losung" target="_blank" class="text-gray-100">GitHub</a>.
+      </div>
     </footer>
   </div>
 </template>
@@ -54,12 +70,7 @@ export default {
   },
   mounted () {
     var self = this
-    // -- ES6:
-    // fetch('2019.csv')
-    //   .then(response => response.text())
-    //   .then(text => self.getLosung(text))
     var rawFile = new XMLHttpRequest();
-    // -- older browsers:
     rawFile.open("GET", self.today.getFullYear() + '.csv', false);
     rawFile.onreadystatechange = function () {
       if (rawFile.readyState === 4 && (rawFile.status === 200 || rawFile.status == 0)) {
@@ -75,9 +86,22 @@ export default {
 </script>
 
 <style>
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
 
+/* custom base styles */
+h1 {
+  @apply text-5xl;
+}
+h2 {
+  @apply text-3xl;
+}
+blockquote {
+  @apply text-xl;
+}
+
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* custom new utilities */
 
 </style>
