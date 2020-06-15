@@ -35,15 +35,14 @@
       <footer class="text-center my-10" :class="{ 'text-gray-500': dark, 'text-gray-700': !dark }">
         <div>
           Version {{ version }}
-          <button @click="dark = !dark" class="cursor-pointer ml-3 outline-none">
-            <div class="inline-block rounded-full w-2 h-2 mr-2 shadow-lg" :class="{ 'bg-yellow-500': dark, 'bg-gray-500': !dark }"></div>
-            <span v-if="dark">Lights on</span>
-            <span v-else>Lights off</span>
+          <button @click="dark = !dark" class="cursor-pointer ml-3">
+            <span v-show="dark"><ion-icon name="sunny-outline" class="w-5 h-5 mr-1 mb-1 align-middle text-yellow-500"></ion-icon> Turn lights on</span>
+            <span v-show="!dark"><ion-icon name="moon-outline" class="w-5 h-5 mr-1 mb-1 align-middle text-gray-500"></ion-icon> Turn lights off</span>
           </button>
         </div>
         <div>
-          Built with ♥ by <a href="https://devmount.de" target="_blank" :class="{ 'text-gray-100': dark, 'text-black': !dark }">Andreas Müller</a>.
-          Download on <a href="https://github.com/devmount/losung" target="_blank" :class="{ 'text-gray-100': dark, 'text-black': !dark }">GitHub</a>.
+          <ion-icon name="code-slash-outline" class="mb-1 align-middle"></ion-icon> with <ion-icon name="heart-outline" class="mb-1 align-middle"></ion-icon> by <a href="https://devmount.de" target="_blank" :class="{ 'text-gray-100': dark, 'text-black': !dark }">Andreas Müller</a>.
+          <ion-icon name="cloud-download-outline" class="mb-1 align-middle"></ion-icon> from <a href="https://github.com/devmount/losung" target="_blank" :class="{ 'text-gray-100': dark, 'text-black': !dark }">GitHub</a>.
         </div>
       </footer>
     </section>
