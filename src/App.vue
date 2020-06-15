@@ -1,8 +1,8 @@
 <template>
   <div id="app" class="min-h-screen mx-2 sm:mx-6 md:max-w-2xl md:mx-auto flex flex-col justify-start sm:justify-between">
     <div>
-      <h1 class="text-center my-4 sm:mb-6 sm:mt-12">Die Losungen</h1>
-      <div v-if="data" class="bg-gray-800 rounded border border-gray-700 p-5 mb-6">
+      <h1 class="text-center my-6 sm:my-12">Die Losungen</h1>
+      <div v-if="data" class="dark:bg-gray-800 light:bg-gray-200 rounded border dark:border-gray-700 light:border-gray-400 p-5 mb-6">
         <!-- weekday, date -->
         <h2>{{ data[1] }}, {{ data[0] }}</h2>
         <!-- special day description -->
@@ -19,7 +19,7 @@
         </blockquote>
       </div>
       <div v-else>No data available. Make sure, the data file for {{ today.getFullYear() }} was uploaded.</div>
-      <div class="text-center text-gray-700">
+      <div class="text-center dark:text-gray-700 light:text-gray-500">
         <div>
           <a href="http://www.losungen.de/" target="_blank">Die Losungen</a>
         </div>
@@ -31,13 +31,13 @@
         </div>
       </div>
     </div>
-    <footer class="text-center my-10">
-      <div class="text-gray-500">
+    <footer class="text-center dark:text-gray-500 light:text-gray-700 my-10">
+      <div>
         Version {{ version }}
       </div>
-      <div class="text-gray-500">
-        Built with 🤍 by <a href="https://devmount.de" target="_blank" class="text-gray-100">Andreas Müller</a>.
-        Download on <a href="https://github.com/devmount/losung" target="_blank" class="text-gray-100">GitHub</a>.
+      <div>
+        Built with 🤍 by <a href="https://devmount.de" target="_blank" class="dark:text-gray-100 light:text-black">Andreas Müller</a>.
+        Download on <a href="https://github.com/devmount/losung" target="_blank" class="dark:text-gray-100 light:text-black">GitHub</a>.
       </div>
     </footer>
   </div>
