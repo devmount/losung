@@ -3,23 +3,37 @@
     <section class="mx-2 sm:mx-6 md:max-w-2xl md:mx-auto flex flex-col justify-start sm:justify-between">
       <div>
         <h1 class="text-center my-6 sm:my-12">Die Losungen</h1>
-        <div v-if="data" class="rounded border p-5 mb-6" :class="{ 'bg-gray-800 border-gray-700': dark, 'bg-gray-200 border-gray-400': !dark }">
-          <!-- weekday, date -->
-          <h2>{{ data[1] }}, {{ data[0] }}</h2>
+        <!-- card with losung content -->
+        <div v-if="losung" class="rounded border p-5 mb-6" :class="{ 'bg-gray-800 border-gray-700': dark, 'bg-gray-200 border-gray-400': !dark }">
+          <h2 class="flex justify-between">
+            <!-- weekday, date -->
+            {{ losung[1] }}, {{ losung[0] }}
+            <nav>
+              <button @click="dayDifference--">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+              </button>
+              <button @click="dayDifference=0">
+                <ion-icon name="refresh-outline"></ion-icon>
+              </button>
+              <button @click="dayDifference++">
+                <ion-icon name="arrow-forward-outline"></ion-icon>
+              </button>
+            </nav>
+          </h2>
           <!-- special day description -->
-          <div>{{ data[2]}}</div>
+          <div>{{ losung[2]}}</div>
           <!-- losung -->
           <blockquote class="mt-5">
-            <p>{{ data[4] }}</p>
-            <cite class="block text-right text-gray-600">—&nbsp;{{ data[3].replace(' ', '&nbsp;') }}</cite>
+            <p>{{ losung[4] }}</p>
+            <cite class="block text-right text-gray-600">—&nbsp;{{ losung[3].replace(' ', '&nbsp;') }}</cite>
           </blockquote>
           <!-- lehrvers -->
           <blockquote class="mt-5">
-            <p>{{ data[6] }}</p>
-            <cite class="block text-right text-gray-600">—&nbsp;{{ data[5].replace(' ', '&nbsp;') }}</cite>
+            <p>{{ losung[6] }}</p>
+            <cite class="block text-right text-gray-600">—&nbsp;{{ losung[5].replace(' ', '&nbsp;') }}</cite>
           </blockquote>
         </div>
-        <div v-else>No data available. Make sure, the data file for {{ today.getFullYear() }} was uploaded.</div>
+        <div v-else class="p-5 mb-6 text-center">No data available. Make sure, the data file for {{ displayDate.getFullYear() }} was uploaded.</div>
         <div class="text-center" :class="{ 'text-gray-700': dark, 'text-gray-500': !dark }">
           <div>
             <a href="http://www.losungen.de/" target="_blank">Die Losungen</a>
@@ -53,43 +67,52 @@
 export default {
   name: 'app',
   data () {
-    var d = new Date()
+    let d = new Date()
     let version = require('../package.json').version
     return {
-      today: d,
-      data: '',
+      displayDate: d,
+      dayDifference: 0,
+      database: null,
       dark: true,
       version: version
     }
   },
+  mounted () {
+    this.getLosung()
+  },
   methods: {
-    getLosung (text) {
-      // get line without quotes
-      var lines = text.replace(/\//g, '').replace(/"/g, '').split(/\r?\n/)
-      for (let line of lines) {
-        var record = line.split(/\t/)
-        var date = record[0].split('.')
-        date = date[2] + '-' + date[1] + '-' + date[0]
-        if (date == this.today.toISOString().substring(0, 10)) {
-          this.data = record
-          break
+    getLosung () {
+      let self = this
+      let rawFile = new XMLHttpRequest()
+      let d = new Date()
+      rawFile.open("GET", d.getFullYear() + '.csv', false);
+      rawFile.onreadystatechange = function () {
+        if (rawFile.readyState === 4 && (rawFile.status === 200 || rawFile.status == 0)) {
+          // fill database without quotes
+          self.database = rawFile.responseText.replace(/\//g, '').replace(/"/g, '').split(/\r?\n/)
         }
       }
+      rawFile.send(null);
     }
   },
-  mounted () {
-    var self = this
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", self.today.getFullYear() + '.csv', false);
-    rawFile.onreadystatechange = function () {
-      if (rawFile.readyState === 4 && (rawFile.status === 200 || rawFile.status == 0)) {
-        var text = rawFile.responseText;
-        self.getLosung(text)
+  computed: {
+    losung () {
+      let d = new Date()
+      d.setDate(d.getDate()+this.dayDifference)
+      if (this.database) {
+        for (let line of this.database) {
+          var record = line.split(/\t/)
+          var date = record[0].split('.')
+          date = date[2] + '-' + date[1] + '-' + date[0]
+          if (date == d.toISOString().substring(0, 10)) {
+            return record
+          }
+        }
+        return ''
       } else {
-        self.data = ''
+        return ''
       }
     }
-    rawFile.send(null);
   }
 }
 </script>
