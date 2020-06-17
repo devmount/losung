@@ -1,21 +1,21 @@
 <template>
-  <div id="app" class="min-h-screen" :class="{ 'text-gray-100 bg-gray-900': dark, 'text-gray-900 bg-white': !dark }">
+  <div id="app" class="min-h-screen fade" :class="{ 'text-gray-100 bg-gray-900': dark, 'text-gray-900 bg-white': !dark }">
     <section class="mx-2 sm:mx-6 md:max-w-2xl md:mx-auto flex flex-col justify-start sm:justify-between">
       <div>
         <h1 class="text-center my-6 sm:my-12">Die Losungen</h1>
         <!-- card with losung content -->
-        <div v-if="losung" class="rounded border p-5 mb-6" :class="{ 'bg-gray-800 border-gray-700': dark, 'bg-gray-200 border-gray-400': !dark }">
+        <div v-if="losung" class="rounded border p-5 mb-6 fade" :class="{ 'bg-gray-800 border-gray-700': dark, 'bg-gray-200 border-gray-400': !dark }">
           <h2 class="flex justify-between">
             <!-- weekday, date -->
             {{ losung[1] }}, {{ losung[0] }}
             <nav class="flex-shrink-0 flex align-top">
-              <button @click="dayDifference--" class="text-xl px-1 text-gray-600 hover:text-white">
+              <button @click="dayDifference--" class="text-xl px-1 fade text-gray-600 hover:text-white">
                 <ion-icon name="arrow-back-outline"></ion-icon>
               </button>
-              <button @click="dayDifference=0" class="text-xl px-1 text-gray-600 hover:text-white stroke-width-10">
+              <button @click="dayDifference=0" class="text-xl px-1 fade text-gray-600 hover:text-white stroke-width-10">
                 <ion-icon name="refresh-outline"></ion-icon>
               </button>
-              <button @click="dayDifference++" class="text-xl px-1 text-gray-600 hover:text-white">
+              <button @click="dayDifference++" class="text-xl px-1 fade text-gray-600 hover:text-white">
                 <ion-icon name="arrow-forward-outline"></ion-icon>
               </button>
             </nav>
@@ -34,7 +34,7 @@
           </blockquote>
         </div>
         <div v-else class="p-5 mb-6 text-center">No data available. Make sure, the data file for {{ displayDate.getFullYear() }} was uploaded.</div>
-        <div class="text-center" :class="{ 'text-gray-700': dark, 'text-gray-500': !dark }">
+        <div class="text-center fade" :class="{ 'text-gray-700': dark, 'text-gray-500': !dark }">
           <div>
             <a href="http://www.losungen.de/" target="_blank">Die Losungen</a>
           </div>
@@ -46,7 +46,7 @@
           </div>
         </div>
       </div>
-      <footer class="text-center my-10" :class="{ 'text-gray-500': dark, 'text-gray-700': !dark }">
+      <footer class="text-center my-10 fade" :class="{ 'text-gray-500': dark, 'text-gray-700': !dark }">
         <div>
           Version {{ version }}
           <button @click="dark = !dark" class="cursor-pointer ml-3">
@@ -129,6 +129,13 @@ h2 {
 }
 blockquote {
   @apply text-xl;
+}
+a,
+button,
+.fade {
+  @apply transition;
+  @apply duration-200;
+  @apply ease-in-out;
 }
 
 @import "tailwindcss/components";
