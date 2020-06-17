@@ -8,14 +8,14 @@
           <h2 class="flex justify-between">
             <!-- weekday, date -->
             {{ losung[1] }}, {{ losung[0] }}
-            <nav>
-              <button @click="dayDifference--">
+            <nav class="flex-shrink-0 flex align-top">
+              <button @click="dayDifference--" class="text-xl px-1 text-gray-600 hover:text-white">
                 <ion-icon name="arrow-back-outline"></ion-icon>
               </button>
-              <button @click="dayDifference=0">
+              <button @click="dayDifference=0" class="text-xl px-1 text-gray-600 hover:text-white stroke-width-10">
                 <ion-icon name="refresh-outline"></ion-icon>
               </button>
-              <button @click="dayDifference++">
+              <button @click="dayDifference++" class="text-xl px-1 text-gray-600 hover:text-white">
                 <ion-icon name="arrow-forward-outline"></ion-icon>
               </button>
             </nav>
@@ -135,5 +135,8 @@ blockquote {
 @import "tailwindcss/utilities";
 
 /* custom new utilities */
+.stroke-width-10 {
+  --ionicon-stroke-width: 2.5rem;
+}
 
 </style>
