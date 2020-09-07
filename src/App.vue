@@ -1,5 +1,13 @@
 <template>
-  <div id="app" class="min-h-screen fade" :class="{ 'text-gray-100 bg-gray-900': dark, 'text-gray-900 bg-white': !dark }">
+  <div
+    id="app"
+    class="min-h-screen fade"
+    :class="{ 'text-gray-100 bg-gray-900': dark, 'text-gray-900 bg-white': !dark }"
+    tabindex="0"
+    ref="container"
+    @keydown.left.exact="dayDifference--"
+    @keydown.right.exact="dayDifference++"
+  >
     <section class="mx-2 sm:mx-6 md:max-w-2xl md:mx-auto flex flex-col justify-start sm:justify-between">
       <div>
         <h1 class="text-center my-6 sm:my-12">Die Losungen</h1>
@@ -79,6 +87,7 @@ export default {
   },
   mounted () {
     this.getLosung()
+    this.$refs.container.focus()
   },
   methods: {
     getLosung () {
