@@ -1,6 +1,6 @@
 {
   "name": "losung",
-  "version": "0.2.5",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
