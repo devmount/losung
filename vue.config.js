@@ -11,7 +11,15 @@ module.exports = {
 					PACKAGE_VERSION: '"' + version + '"'
 				}
 			})
-		]
+		],
+		performance: {
+			maxEntrypointSize: 10240000,
+			maxAssetSize: 10240000
+		},
+		output: {
+			filename: "js/[name].js",
+			chunkFilename: "js/[name].bundle.js",
+		},
 	},
 	publicPath: '/'
 }
