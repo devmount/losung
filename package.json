@@ -16,7 +16,7 @@
     "@vue/cli-plugin-babel": "^4.5.12",
     "@vue/cli-service": "^4.5.12",
     "autoprefixer": "^9",
-    "postcss": "^7",
+    "postcss": "^8",
     "vue-cli-plugin-tailwind": "^2.0.6",
     "vue-template-compiler": "^2.6.12"
   },
