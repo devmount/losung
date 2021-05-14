@@ -56,7 +56,7 @@
       </div>
       <footer class="text-center my-10 fade" :class="{ 'text-gray-500': dark, 'text-gray-700': !dark }">
         <div>
-          Version {{ appVersion }}
+          Version {{ $version }}
           <button @click="dark = !dark" class="cursor-pointer ml-3">
             <span v-show="dark"><ion-icon name="sunny-outline" class="w-5 h-5 mr-1 mb-1 align-middle text-yellow-500"></ion-icon> Turn lights on</span>
             <span v-show="!dark"><ion-icon name="moon-outline" class="w-5 h-5 mr-1 mb-1 align-middle text-gray-500"></ion-icon> Turn lights off</span>
@@ -121,9 +121,6 @@ export default {
       } else {
         return ''
       }
-    },
-    appVersion() {
-      return process.env.PACKAGE_VERSION;
     }
   }
 }
