@@ -1,6 +1,6 @@
 # This workflow will create a GitHub release every time a tag is pushed
 
-name: release
+name: Release
 
 on:
   push:
@@ -9,10 +9,9 @@ on:
 
 jobs:
   release:
-    name: Create Release
     runs-on: ubuntu-latest
     steps:
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      - uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
