@@ -1,7 +1,7 @@
 {
   "name": "losung",
   "version": "1.0.4",
-  "private": true,
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build"
@@ -13,9 +13,9 @@
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^4.0.3",
-    "@vue/cli-plugin-babel": "^4.5.12",
-    "@vue/cli-service": "^4.5.12",
-    "autoprefixer": "^9",
+    "@vue/cli-plugin-babel": "^5.0.0-rc.2",
+    "@vue/cli-service": "^5.0.0-rc.2",
+    "autoprefixer": "^10",
     "postcss": "^8",
     "vue-cli-plugin-tailwind": "^2.0.6",
     "vue-template-compiler": "^2.6.12"
@@ -24,17 +24,6 @@
     "presets": [
       "@vue/app"
     ]
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {}
   },
   "postcss": {
     "plugins": {
