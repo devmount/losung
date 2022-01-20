@@ -1,13 +1,10 @@
-import Vue from 'vue'
-import App from './App.vue'
-
-// set local config
-Vue.config.productionTip = false
-Vue.config.ignoredElements = [/^ion-/]
+// init app
+import { createApp } from 'vue';
+import App from '@/App.vue';
+const app = createApp(App);
 
 // set global properties
-Vue.prototype.$version = process.env.VUE_APP_VERSION
+app.config.globalProperties.$version = process.env.VUE_APP_VERSION;
 
-new Vue({
-  render: h => h(App),
-}).$mount('#app')
+// ready? let's go!
+app.mount('#app');

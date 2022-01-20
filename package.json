@@ -9,7 +9,7 @@
   "dependencies": {
     "@tailwindcss/postcss7-compat": "npm:@tailwindcss/postcss7-compat",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "vue": "^2.6.12"
+    "vue": "^3.2.27"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^4.0.3",
