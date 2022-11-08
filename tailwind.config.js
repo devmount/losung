@@ -1,5 +1,5 @@
 module.exports = {
-  purge: false,
+  content: ['./index.html', './src/**/*.{vue,js}'],
   theme: {
     extend: {
       screens: {
