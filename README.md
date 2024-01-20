@@ -34,11 +34,11 @@ A web app to display the Losung for today. Provides a simple navigation to show 
 4. Either start the development server with hot reload at localhost:8080 ...
 
     ```bash
-    npm dev
+    npm run dev
     ```
 
 5. ... or create a production build with minification
 
     ```bash
-    npm build
+    npm run build
     ```
