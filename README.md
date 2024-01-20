@@ -16,7 +16,7 @@ A web app to display the Losung for today. Provides a simple navigation to show 
     git clone https://github.com/devmount/losung
     ```
 
-2. Install all dependencies using [Yarn](https://yarnpkg.com)
+2. Install all dependencies
 
     ```bash
     cd losung
