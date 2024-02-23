@@ -5,8 +5,8 @@
     :class="{ 'text-gray-100 bg-gray-900': dark, 'text-gray-900 bg-white': !dark }"
     tabindex="0"
     ref="container"
-    @keydown.left.exact="dayDifference--"
-    @keydown.right.exact="dayDifference++"
+    @keydown.left.exact="prevDay"
+    @keydown.right.exact="nextDay"
   >
     <section class="mx-2 sm:mx-6 md:max-w-2xl md:mx-auto flex flex-col justify-start sm:justify-between">
       <div>
@@ -25,19 +25,19 @@
             <span class="text-3xl">{{ losung[1] }}, {{ losung[0] }}</span>
             <nav class="flex-shrink-0 flex align-top">
               <button
-                @click="dayDifference--"
+                @click="prevDay"
                 class="text-xl px-1 text-gray-600 hover:text-white transition duration-200 ease-in-out"
               >
                 <icon-arrow-left />
               </button>
               <button
-                @click="dayDifference=0"
+                @click="today"
                 class="text-xl px-1 text-gray-600 hover:text-white stroke-width-10 transition duration-200 ease-in-out"
               >
                 <icon-refresh />
               </button>
               <button
-                @click="dayDifference++"
+                @click="nextDay"
                 class="text-xl px-1 text-gray-600 hover:text-white transition duration-200 ease-in-out"
               >
                 <icon-arrow-right />
@@ -58,7 +58,7 @@
           </blockquote>
         </div>
         <div v-else class="p-5 mb-6 text-center">
-          No data available. Make sure, the data file for {{ displayDate.getFullYear() }} was uploaded.
+          No data available. Make sure, the data file for {{ d.getFullYear() }} was uploaded.
         </div>
         <div
           class="text-center leading-5 transition duration-200 ease-in-out"
@@ -120,7 +120,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, computed } from 'vue';
+import { onMounted, ref } from 'vue';
 
 // icons
 import {
@@ -129,45 +129,58 @@ import {
   IconRefresh,
   IconSun,
   IconMoon,
-	IconHeart,
+  IconHeart,
 } from '@tabler/icons-vue';
 
 // app properties
 const version = APP_VERSION;
-const displayDate = ref(new Date());
-const dayDifference = ref(0);
+const d = ref(new Date());
 const database = ref(null);
+const losung = ref('');
 const dark = ref(true);
 const container = ref(null);
 
 onMounted(async () => {
-  container.value.focus()
-  await getLosung()
+  container.value.focus();
+  await getLosungData();
+  getLosung();
 });
 
-const getLosung = async () => {
-  const d = new Date()
+const getLosungData = async () => {
   // fill database without quotes
-  const response = await fetch(d.getFullYear() + '.csv');
-  const text = await response.text()
+  const response = await fetch(d.value.getFullYear() + '.csv');
+  let text = await response.arrayBuffer()
+  const decoder = new TextDecoder('iso-8859-1');
+  text = decoder.decode(text);
   database.value = text.replace(/\//g, '').replace(/"/g, '').split(/\r?\n/)
 };
 
-const losung = computed(() => {
-  const d = new Date()
-  d.setDate(d.getDate()+dayDifference.value)
+const getLosung = () => {
   if (database.value) {
     for (let line of database.value) {
-      var record = line.split(/\t/)
-      var date = record[0].split('.')
-      date = date[2] + '-' + date[1] + '-' + date[0]
-      if (date == d.toISOString().substring(0, 10)) {
-        return record
+      const record = line.split(/\t/);
+      var date = record[0].split('.').reverse().join('-');
+      if (date == d.value.toISOString().substring(0, 10)) {
+        losung.value = record;
       }
     }
-    return ''
   } else {
-    return ''
+    losung.value = '';
   }
-});
+};
+
+const nextDay = () => {
+  d.value.setDate(d.value.getDate()+1);
+  getLosung();
+};
+
+const prevDay = () => {
+  d.value.setDate(d.value.getDate()-1);
+  getLosung();
+};
+
+const today = () => {
+  d.value = new Date();
+  getLosung();
+};
 </script>
