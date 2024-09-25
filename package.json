@@ -9,11 +9,11 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@tabler/icons-vue": "^2.14.0",
+    "@tabler/icons-vue": "^3.17.0",
     "vue": "^3.2.27"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^5.0.0",
+    "@fullhuman/postcss-purgecss": "^6.0.0",
     "@vitejs/plugin-vue": "^5.0.4",
     "autoprefixer": "^10",
     "postcss": "^8",
