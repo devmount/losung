@@ -23,22 +23,22 @@
           <h2 class="flex justify-between">
             <!-- weekday, date -->
             <span class="text-3xl">{{ losung[1] }}, {{ losung[0] }}</span>
-            <nav class="flex-shrink-0 flex align-top">
+            <nav class="flex items-center">
               <button
                 @click="prevDay"
-                class="text-xl px-1 text-gray-600 hover:text-white transition duration-200 ease-in-out"
+                class="w-10 text-xl px-1 text-gray-600 hover:text-white transition duration-200 ease-in-out"
               >
                 <icon-arrow-left />
               </button>
               <button
                 @click="today"
-                class="text-xl px-1 text-gray-600 hover:text-white stroke-width-10 transition duration-200 ease-in-out"
+                class="w-10 text-xl px-1 text-gray-600 hover:text-white stroke-width-10 transition duration-200 ease-in-out"
               >
                 <icon-refresh />
               </button>
               <button
                 @click="nextDay"
-                class="text-xl px-1 text-gray-600 hover:text-white transition duration-200 ease-in-out"
+                class="w-10 text-xl px-1 text-gray-600 hover:text-white transition duration-200 ease-in-out"
               >
                 <icon-arrow-right />
               </button>
