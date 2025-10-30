@@ -14,7 +14,7 @@
         <!-- card with losung content -->
         <div
           v-if="losung"
-          class="rounded border p-5 mb-6 transition duration-200 ease-in-out"
+          class="rounded-sm border p-5 mb-6 transition duration-200 ease-in-out"
           :class="{
             'bg-gray-800 border-gray-700': dark,
             'bg-gray-200 border-gray-400': !dark
@@ -26,19 +26,19 @@
             <nav class="flex items-center">
               <button
                 @click="prevDay"
-                class="w-10 text-xl px-1 text-gray-600 hover:text-white transition duration-200 ease-in-out"
+                class="w-10 text-xl px-1 text-gray-600 hover:text-white transition duration-200 ease-in-out cursor-pointer"
               >
                 <icon-arrow-left />
               </button>
               <button
                 @click="today"
-                class="w-10 text-xl px-1 text-gray-600 hover:text-white stroke-width-10 transition duration-200 ease-in-out"
+                class="w-10 text-xl px-1 text-gray-600 hover:text-white stroke-width-10 transition duration-200 ease-in-out cursor-pointer"
               >
                 <icon-refresh />
               </button>
               <button
                 @click="nextDay"
-                class="w-10 text-xl px-1 text-gray-600 hover:text-white transition duration-200 ease-in-out"
+                class="w-10 text-xl px-1 text-gray-600 hover:text-white transition duration-200 ease-in-out cursor-pointer"
               >
                 <icon-arrow-right />
               </button>
