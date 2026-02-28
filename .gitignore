@@ -4,6 +4,7 @@ node_modules
 
 # src files
 *.csv
+*.xml
 
 # local env files
 .env.local
