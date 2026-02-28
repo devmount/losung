@@ -22,7 +22,7 @@
         >
           <h2 class="flex justify-between">
             <!-- weekday, date -->
-            <span class="text-3xl">{{ losung[1] }}, {{ losung[0] }}</span>
+            <span class="text-3xl">{{ losung.dateFormatted }}</span>
             <nav class="flex items-center">
               <button
                 @click="prevDay"
@@ -45,16 +45,16 @@
             </nav>
           </h2>
           <!-- special day description -->
-          <div>{{ losung[2]}}</div>
+          <div>{{ losung.sunday}}</div>
           <!-- losung -->
           <blockquote class="text-xl mt-5">
-            <p>{{ losung[4] }}</p>
-            <cite class="block text-right text-gray-600">—&nbsp;{{ losung[3].replace(' ', '&nbsp;') }}</cite>
+            <p>{{ losung.losung }}</p>
+            <cite class="block text-right text-gray-600">— {{ losung.lverse }}</cite>
           </blockquote>
           <!-- lehrvers -->
           <blockquote class="text-xl mt-5">
-            <p>{{ losung[6] }}</p>
-            <cite class="block text-right text-gray-600">—&nbsp;{{ losung[5].replace(' ', '&nbsp;') }}</cite>
+            <p>{{ losung.teaching }}</p>
+            <cite class="block text-right text-gray-600">— {{ losung.tverse }}</cite>
           </blockquote>
         </div>
         <div v-else class="p-5 mb-6 text-center">
@@ -135,8 +135,8 @@ import {
 // app properties
 const version = APP_VERSION;
 const d = ref(new Date());
-const database = ref(null);
-const losung = ref('');
+const database = ref([]);
+const losung = ref(null);
 const dark = ref(true);
 const container = ref(null);
 
@@ -148,24 +148,34 @@ onMounted(async () => {
 
 const getLosungData = async () => {
   // fill database without quotes
-  const response = await fetch(d.value.getFullYear() + '.csv');
-  let text = await response.arrayBuffer()
-  const decoder = new TextDecoder('iso-8859-1');
-  text = decoder.decode(text);
-  database.value = text.replace(/\//g, '').replace(/"/g, '').split(/\r?\n/)
+  const response = await fetch(d.value.getFullYear() + '.xml');
+  let text = await response.text();
+  const parser = new DOMParser();
+  const xmlDoc = parser.parseFromString(text, "text/xml");
+  const records = xmlDoc.querySelectorAll('Losungen');
+  records.forEach((record) => {
+    database.value.push({
+      date: record.querySelector('Datum').textContent,
+      dateFormatted: new Date(record.querySelector('Datum').textContent)
+        .toLocaleDateString("de-DE", { weekday: "long", year: "numeric", month: "long", day: "numeric" }),
+      sunday: record.querySelector('Sonntag')?.textContent ?? '',
+      losung: record.querySelector('Losungstext')?.textContent ?? '',
+      lverse: record.querySelector('Losungsvers')?.textContent ?? '',
+      teaching: record.querySelector('Lehrtext')?.textContent ?? '',
+      tverse: record.querySelector('Lehrtextvers')?.textContent ?? '',
+    });
+  });
 };
 
 const getLosung = () => {
-  if (database.value) {
-    for (let line of database.value) {
-      const record = line.split(/\t/);
-      var date = record[0].split('.').reverse().join('-');
-      if (date == d.value.toISOString().substring(0, 10)) {
+  if (database.value.length) {
+    for (let record of database.value) {
+      if (record.date.substring(0, 10) == d.value.toISOString().substring(0, 10)) {
         losung.value = record;
       }
     }
   } else {
-    losung.value = '';
+    losung.value = null;
   }
 };
 
