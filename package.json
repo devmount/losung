@@ -13,7 +13,7 @@
     "vue": "^3.2.27"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.16",
+    "@tailwindcss/postcss": "^4.3.3",
     "@vitejs/plugin-vue": "^6.0.1",
     "tailwindcss": "^4.1.16",
     "vite": "^8.0.16"
