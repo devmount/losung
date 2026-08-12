@@ -20,7 +20,7 @@ A web app to display the Losung for today. Provides a simple navigation to show 
 
     ```bash
     cd losung
-    npm install
+    pnpm install
     ```
 
 3. Get the XML source file from Herrnhuter Brüdergemeinde for the current year, rename and move it to the `public` directory. This step has to be repeated every year. Here an example for 2026:
@@ -34,11 +34,11 @@ A web app to display the Losung for today. Provides a simple navigation to show 
 4. Either start the development server with hot reload at localhost:8080 ...
 
     ```bash
-    npm run dev
+    pnpm dev
     ```
 
 5. ... or create a production build with minification
 
     ```bash
-    npm run build
+    pnpm build
     ```

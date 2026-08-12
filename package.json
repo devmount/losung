@@ -3,6 +3,7 @@
   "version": "2.1.0",
   "license": "MIT",
   "private": false,
+  "packageManager": "pnpm@11.21.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
