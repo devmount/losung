@@ -14,19 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v7
-    - name: Use pnpm
-      uses: pnpm/action-setup@v6
+    - name: Setup pnpm and Node.js, install dependencies
+      uses: pnpm/setup@v3
       with:
-        version: 11
-    - name: Use Node.js 24
-      uses: actions/setup-node@v7
-      with:
-        node-version: 24.x
-        cache: 'pnpm'
+        runtime: node@26
+        cache: true
     - name: Build app using pnpm
-      run: |
-        pnpm install
-        pnpm build
+      run: pnpm build
     - name: Push Build files to production
       uses: burnett01/rsync-deployments@v9
       with:
