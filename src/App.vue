@@ -48,12 +48,12 @@
           <div>{{ losung.sunday}}</div>
           <!-- losung -->
           <blockquote class="text-xl mt-5">
-            <p>{{ losung.losung }}</p>
+            <p v-html="losung.losung"></p>
             <cite class="block text-right text-gray-600">— {{ losung.lverse }}</cite>
           </blockquote>
           <!-- lehrvers -->
           <blockquote class="text-xl mt-5">
-            <p>{{ losung.teaching }}</p>
+            <p v-html="losung.teaching"></p>
             <cite class="block text-right text-gray-600">— {{ losung.tverse }}</cite>
           </blockquote>
         </div>
@@ -146,6 +146,11 @@ onMounted(async () => {
   getLosung();
 });
 
+// turn text between slashes into italic text and text between hashes into bold text
+const formatText = (text) => text
+  .replace(/\/([^/]+)\//g, '<em>$1</em>')
+  .replace(/#([^#]+)#/g, '<strong>$1</strong>');
+
 const getLosungData = async () => {
   // fill database without quotes
   const response = await fetch(d.value.getFullYear() + '.xml');
@@ -159,9 +164,9 @@ const getLosungData = async () => {
       dateFormatted: new Date(record.querySelector('Datum').textContent)
         .toLocaleDateString("de-DE", { weekday: "long", year: "numeric", month: "long", day: "numeric" }),
       sunday: record.querySelector('Sonntag')?.textContent ?? '',
-      losung: record.querySelector('Losungstext')?.textContent ?? '',
+      losung: formatText(record.querySelector('Losungstext')?.textContent ?? ''),
       lverse: record.querySelector('Losungsvers')?.textContent ?? '',
-      teaching: record.querySelector('Lehrtext')?.textContent ?? '',
+      teaching: formatText(record.querySelector('Lehrtext')?.textContent ?? ''),
       tverse: record.querySelector('Lehrtextvers')?.textContent ?? '',
     });
   });
